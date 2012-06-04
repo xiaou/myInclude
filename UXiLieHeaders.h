@@ -1,9 +1,9 @@
 /**
  * @file UAutoObjC.h
  * @brief U打头的一些列工具.
- * @author hUyiNcHun
+ * @author hUyIncHun
  * @date 2012
- * @version 2.5
+ * @version 2.6
  * @par 修改记录：
  *  -1.0:
  */
@@ -27,3 +27,4 @@
 
 
 #endif // _UXiLieHeaders_h_
+

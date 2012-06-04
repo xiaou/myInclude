@@ -3,16 +3,13 @@
  * @brief 在当前栈出栈时调用objective-c对象(CFTypeRef或NSObject皆可)的release函数一次.
  * @note 建议开启混编C++支持:xcode4配制BuildSettings/Compile Sources As/Objective-C++或改使用此工具的源文件扩展名为mm.
  * @warning ...
- * @author hUyiNcHun
+ * @author hUyIncHun
  * @date 2010-2011
- * @version 3.5
+ * @version 3.6
  * @par 修改记录：
  *  -3.5:支持了非c++ —— 只是为了兼容性.
  *  -3.0:增加_create_valueName.
  *  -2.0:确定CFRelease()会调用obj-c的-release实例函数.
- *  -1.0:
- * @addtogroup UAutoObjC UAutoObjC
- * @{
  */
 
 
@@ -76,4 +73,4 @@ private:
 /**************************************************/
 #endif // _UAutoObjC_h_
 
-/** @} */
+

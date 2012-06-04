@@ -3,9 +3,9 @@
  * @brief 本人调试用的文件.
  * @note 调试时要把下面定义的宏UDebug设为1.EDebug在排错调试时设为1.
  * @warning 项目最终时"应该"把下面定义的宏UDebug设为0,"必须"把EDebug设为0.
- * @author hUyiNcHun
+ * @author hUyIncHun
  * @date 2010-2011
- * @version 5.0
+ * @version 5.1
  * @par 修改记录：
  *  -4.6:因为asm("int3")指令在真机下有问题，所以修改了UDBreak宏.
  *  -4.5:发现xcode4调试版默认添加宏DEBUG=1.
@@ -89,3 +89,4 @@ EXTERN_C void __UDInfoClass(Class cla);
 /**************************************************/
 #endif // _UDebug_h_
 /** @} */
+

@@ -1,9 +1,9 @@
 /**
  * @file UUIUtility.h
  * @brief 快捷UI获取等辅助工具.
- * @author hUyiNcHun
+ * @author hUyIncHun
  * @date 2012
- * @version 2.0
+ * @version 2.1
  * @par 修改记录：
  *  -2.0:加函数.
  *  -1.9:增加高清设备的判断.

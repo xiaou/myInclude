@@ -46,3 +46,4 @@ BOOL UIUDeviceIsBackgroundSupported()
     
     return backgroundSupported;
 }
+

@@ -1,6 +1,7 @@
 /*
  * @brief 网上下载的objective-c的单例模版.
- * @note fix a few compiled error by spring.
+ * @note fix a few compiled error by hUyIncHun.
+ * @version 1.1
  */
 
 //
@@ -220,3 +221,4 @@ static __CLASSNAME__* volatile _##__CLASSNAME__##_sharedInstance = nil;	\
 }
 
 #endif 
+
