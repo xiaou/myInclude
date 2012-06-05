@@ -63,8 +63,6 @@ EXTERN_C void __UDInfoClass(Class cla);
 		//UDASM("int3");\
 		//UDASM("nop");
 
-#define UDInfoFunc UDLog(@"UDInfoFunc:\nline:%d %s", __LINE__, __func__)
-
 #define UDInfoClass(cla) __UDInfoClass(cla)
 
 // }
@@ -80,10 +78,15 @@ EXTERN_C void __UDInfoClass(Class cla);
 
 #define UDBreak   
 
-#define UDInfoClass(Class cla) 
+#define UDInfoClass(cla) 
 
 // }
 #endif//_!UDebug_
+
+
+///
+//
+#define UDInfoFunc UDLog(@"UDInfoFunc:\nline:%d %s", __LINE__, __func__)
 
 
 /**************************************************/
