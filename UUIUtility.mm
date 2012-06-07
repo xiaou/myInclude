@@ -36,8 +36,8 @@ BOOL UIUDeviceIsBackgroundSupported()
 {
     static BOOL backgroundSupported = NO; 
     
-    static dispatch_once_t onceToken__;
-    dispatch_once(&onceToken__,^
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^
                   {
                       UIDevice* device = [UIDevice currentDevice];
                       if ([device respondsToSelector:@selector(isMultitaskingSupported)])
