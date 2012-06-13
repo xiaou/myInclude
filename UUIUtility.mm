@@ -47,3 +47,87 @@ BOOL UIUDeviceIsBackgroundSupported()
     return backgroundSupported;
 }
 
+
+
+@implementation UINavigationController(_flipAnimation_)
+
+static void (^ g_block4flipAnimation4Nav)(void) = NULL;
+
+- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+{
+    if(g_block4flipAnimation4Nav)
+    {
+        g_block4flipAnimation4Nav();
+        g_block4flipAnimation4Nav = NULL;
+    }
+}
+
+- (void)pushFlipAnimationViewController:(UIViewController *)vc
+                    withCompletionBlock:(void (^)(void))block
+{    
+    UIViewController * oldViewController = [[self.topViewController retain] autorelease];
+    [self pushViewController:vc animated:NO];
+    
+    UIView * oldView;
+    if(oldViewController.tabBarController)
+        oldView = oldViewController.tabBarController.view;
+    else if(oldViewController.navigationController)
+        oldView = oldViewController.navigationController.view;
+    else 
+        oldView = oldViewController.view;
+        
+    [UIView beginAnimations:@"__FlipAnimationForNav" context:NULL];  
+    [UIView setAnimationDuration:.7];  
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft   
+                           forView:oldView cache:YES];  
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+    g_block4flipAnimation4Nav = block;
+    [UIView commitAnimations];
+}
+
+- (void)popFlipAnimationViewControllerWithCompletionBlock:(void (^)(void))block
+{
+    UIViewController * oldViewController = [[self.topViewController retain] autorelease];
+    
+    UIView * oldView;
+    if(oldViewController.tabBarController)
+        oldView = oldViewController.tabBarController.view;
+    else if(oldViewController.navigationController)
+        oldView = oldViewController.navigationController.view;
+    else 
+        oldView = oldViewController.view;
+    
+    [UIView beginAnimations:@"__FlipAnimationForNav" context:NULL];  
+    [UIView setAnimationDuration:.7];  
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight  
+                           forView:oldView cache:YES];  
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+    g_block4flipAnimation4Nav = block;
+    [UIView commitAnimations];    
+    
+    [self popViewControllerAnimated:NO];//悟性!
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

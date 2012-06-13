@@ -3,7 +3,7 @@
  * @brief U打头的一些列工具.
  * @author hUyIncHun
  * @date 2012
- * @version 2.7
+ * @version 2.85
  * @par 修改记录：
  *  -1.0:
  */

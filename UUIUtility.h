@@ -3,8 +3,9 @@
  * @brief 快捷UI获取等辅助工具.
  * @author hUyIncHun
  * @date 2012
- * @version 2.1
+ * @version 2.25
  * @par 修改记录：
+ *  -2.2:增加nav的push和pop的翻转动画函数.(未经严格测验，仅保证在tab嵌nav的状况下无误.)
  *  -2.0:加函数.
  *  -1.9:增加高清设备的判断.
  *  -1.5:改函数名首大写.
@@ -39,7 +40,13 @@ CG_EXTERN BOOL UIUDeviceIsBackgroundSupported();
 #define UIU_IsRetina    ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00)
 
 
-
+///
+//
+@interface UINavigationController(_flipAnimation_)
+- (void)pushFlipAnimationViewController:(UIViewController *)vc
+                    withCompletionBlock:(void (^)(void))block;
+- (void)popFlipAnimationViewControllerWithCompletionBlock:(void (^)(void))block;
+@end
 
 /**************************************************/
 #endif // _UUIUtility_h_
