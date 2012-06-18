@@ -113,11 +113,63 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
 @end
 
 
+@implementation UIWebView(_UIU_)
+
+- (int)scrollPosition
+{
+    return [[self stringByEvaluatingJavaScriptFromString:@"window.pageYOffset"] intValue];
+}
+
+- (void)scrollToYPosition:(int)y
+{
+    [self stringByEvaluatingJavaScriptFromString: [NSString stringWithFormat:@"window.scrollBy(0,%d);", y]];
+}
+
+- (int)sizePage
+{
+    return [[self stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"] intValue];
+}
+
+@end
 
 
+@implementation UITabBarController(_UIU_)
 
+- (void)makeTabBarHidden:(BOOL)hide
+{
+    if ( [self.view.subviews count] < 2 )
+    {
+        return;
+    }
+    
+    UIView *contentView;
+    
+    if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
+    {
+        contentView = [self.view.subviews objectAtIndex:1];
+    }
+    else
+    {
+        contentView = [self.tabBarController.view.subviews objectAtIndex:0];
+    }
+    //    [UIView beginAnimati*****:@"TabbarHide" context:nil];
+    if ( hide )
+    {
+        contentView.frame = self.tabBarController.view.bounds;        
+    }
+    else
+    {
+        contentView.frame = CGRectMake(self.tabBarController.view.bounds.origin.x,
+                                       self.tabBarController.view.bounds.origin.y,
+                                       self.tabBarController.view.bounds.size.width,
+                                       self.tabBarController.view.bounds.size.height - self.tabBarController.tabBar.frame.size.height);
+    }
+    
+    self.tabBarController.tabBar.hidden = hide;
+    //    [UIView commitAnimati*****];    
+}
 
-
+@end
 
 
 

@@ -3,8 +3,9 @@
  * @brief 快捷UI获取等辅助工具.
  * @author hUyIncHun
  * @date 2012
- * @version 2.25
+ * @version 2.31
  * @par 修改记录：
+ *  -2.3:增加category方法.
  *  -2.2:增加nav的push和pop的翻转动画函数.(未经严格测验，仅保证在tab嵌nav的状况下无误.)
  *  -2.0:加函数.
  *  -1.9:增加高清设备的判断.
@@ -40,12 +41,28 @@ CG_EXTERN BOOL UIUDeviceIsBackgroundSupported();
 #define UIU_IsRetina    ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00)
 
 
-///
+///Navigation
 //
 @interface UINavigationController(_flipAnimation_)
 - (void)pushFlipAnimationViewController:(UIViewController *)vc
                     withCompletionBlock:(void (^)(void))block;
 - (void)popFlipAnimationViewControllerWithCompletionBlock:(void (^)(void))block;
+@end
+
+
+///WebView
+//
+@interface UIWebView(_UIU_)
+- (int)scrollPosition;
+- (void)scrollToYPosition:(int)y;
+- (int)sizePage;
+@end
+
+
+///tabBarController
+//
+@interface UITabBarController(_UIU_)
+- (void)makeTabBarHidden:(BOOL)hide;
 @end
 
 /**************************************************/
