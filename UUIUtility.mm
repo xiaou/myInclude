@@ -141,32 +141,27 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
     {
         return;
     }
-    
     UIView *contentView;
-    
     if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
     {
         contentView = [self.view.subviews objectAtIndex:1];
     }
     else
     {
-        contentView = [self.tabBarController.view.subviews objectAtIndex:0];
+        contentView = [self.view.subviews objectAtIndex:0];
     }
-    //    [UIView beginAnimati*****:@"TabbarHide" context:nil];
     if ( hide )
     {
-        contentView.frame = self.tabBarController.view.bounds;        
+        contentView.frame = self.view.bounds;        
     }
     else
     {
-        contentView.frame = CGRectMake(self.tabBarController.view.bounds.origin.x,
-                                       self.tabBarController.view.bounds.origin.y,
-                                       self.tabBarController.view.bounds.size.width,
-                                       self.tabBarController.view.bounds.size.height - self.tabBarController.tabBar.frame.size.height);
+        contentView.frame = CGRectMake(self.view.bounds.origin.x,
+                                       self.view.bounds.origin.y,
+                                       self.view.bounds.size.width,
+                                       self.view.bounds.size.height - self.tabBar.frame.size.height);
     }
-    
-    self.tabBarController.tabBar.hidden = hide;
-    //    [UIView commitAnimati*****];    
+    self.tabBar.hidden = hide; 
 }
 
 @end
