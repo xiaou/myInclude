@@ -164,6 +164,24 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
     self.tabBar.hidden = hide; 
 }
 
+- (BOOL)hasMakeTabBarHiddened
+{
+    if ( [self.view.subviews count] < 2 )
+    {
+        return NO;
+    }
+    UIView *contentView;
+    if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
+    {
+        contentView = [self.view.subviews objectAtIndex:1];
+    }
+    else
+    {
+        contentView = [self.view.subviews objectAtIndex:0];
+    }
+    return contentView.frame.size.height == self.view.bounds.size.height;
+}
+
 @end
 
 

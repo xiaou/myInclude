@@ -63,6 +63,7 @@ CG_EXTERN BOOL UIUDeviceIsBackgroundSupported();
 //
 @interface UITabBarController(_UIU_)
 - (void)makeTabBarHidden:(BOOL)hide;
+- (BOOL)hasMakeTabBarHiddened;
 @end
 
 /**************************************************/
