@@ -3,8 +3,9 @@
  * @brief 快捷UI获取等辅助工具.
  * @author hUyIncHun
  * @date 2012
- * @version 2.31
+ * @version 3.0
  * @par 修改记录：
+ *  -3.0:屏蔽mac os x下编译此文件的代码.
  *  -2.3:增加category方法.
  *  -2.2:增加nav的push和pop的翻转动画函数.(未经严格测验，仅保证在tab嵌nav的状况下无误.)
  *  -2.0:加函数.
@@ -12,6 +13,11 @@
  *  -1.5:改函数名首大写.
  *  -1.2:fix a bug about UIUGetMainWindow.
  */
+
+
+#ifdef MAC_OS_X_VERSION_10_0
+#define _UUIUtility_h_
+#endif
 
 /**************************************************/
 #ifndef _UUIUtility_h_
