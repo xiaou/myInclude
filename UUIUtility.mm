@@ -1,5 +1,3 @@
-#ifndef MAC_OS_X_VERSION_10_0
-
 #import "UUIUtility.h"
 
 
@@ -187,7 +185,7 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
 @end
 
 
-#endif //__#ifndef MAC_OS_X_VERSION_10_0__
+
 
 
 
