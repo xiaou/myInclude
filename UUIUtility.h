@@ -3,7 +3,7 @@
  * @brief 快捷UI获取等辅助工具.
  * @author hUyIncHun
  * @date 2012
- * @version 2.31
+ * @version 2.33
  * @par 修改记录：
  *  -2.3:增加category方法.
  *  -2.2:增加nav的push和pop的翻转动画函数.(未经严格测验，仅保证在tab嵌nav的状况下无误.)
@@ -36,9 +36,16 @@ CG_EXTERN BOOL UIUDeviceIsBackgroundSupported();
 //
 #define UIU_IsIPad    (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
-#define UIU_IsIOS5    ([[[UIDevice currentDevice] systemVersion] intValue] >= 5)
-
 #define UIU_IsRetina    ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00)
+
+#define UIU_IsIOS4      ([[[UIDevice currentDevice] systemVersion] intValue] < 5)
+#define UIU_IsIOS5      ([[[UIDevice currentDevice] systemVersion] intValue] == 5)
+#define UIU_IsIOSLT5    UIU_IsIOS4  /* ps: 'LT' mean 'less than'; 'GT' mean 'greater than'; 'GE' mean 'greater equal'. */
+#define UIU_IsIOSGE5    ([[[UIDevice currentDevice] systemVersion] intValue] >= 5)
+#define UIU_IsIOSGT5    ([[[UIDevice currentDevice] systemVersion] intValue] > 5)
+#define UIU_IsIOS6      ([[[UIDevice currentDevice] systemVersion] intValue] == 6)
+#define UIU_IsIOSLT6    ([[[UIDevice currentDevice] systemVersion] intValue] < 6)
+#define UIU_IsIOSGE6    UIU_IsIOSGT5
 
 
 ///Navigation
