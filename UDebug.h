@@ -5,7 +5,7 @@
  * @warning 项目最终时"应该"把下面定义的宏UDebug设为0,"必须"把EDebug设为0.
  * @author hUyIncHun
  * @date 2010-2011
- * @version 5.2
+ * @version 5.2.1
  * @par 修改记录：
  *  -5.2:加入assert的release版本忽略条件。
  *  -4.6:因为asm("int3")指令在真机下有问题，所以修改了UDBreak宏.
@@ -62,9 +62,9 @@ EXTERN_C void __UDInfoClass(Class cla);
 #define UDLog(fmt, ...) NSLog(fmt, ##__VA_ARGS__)
 
 #define UDBreak	   \
-        raise(SIGTRAP);
-		//UDASM("int3");\
-		//UDASM("nop");
+		UDASM("int3");\
+		UDASM("nop");
+        //raise(SIGTRAP);
 
 #define UDInfoClass(cla) __UDInfoClass(cla)
 
