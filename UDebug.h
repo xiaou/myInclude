@@ -5,8 +5,9 @@
  * @warning 项目最终时"应该"把下面定义的宏UDebug设为0,"必须"把EDebug设为0.
  * @author hUyIncHun
  * @date 2010-2011
- * @version 5.2.2
+ * @version 5.2.3
  * @par 修改记录：
+ *  -5.2.3:加入对UDLog输出日志的识别.
  *  -5.2:加入assert的release版本忽略条件。
  *  -4.6:因为asm("int3")指令在真机下有问题，所以修改了UDBreak宏.
  *  -4.5:发现xcode4调试版默认添加宏DEBUG=1.
@@ -59,7 +60,8 @@ EXTERN_C void __UDInfoClass(Class cla);
 #if UDebug
 // {
 
-#define UDLog(fmt, ...) NSLog(fmt, ##__VA_ARGS__)
+#define SignUDLog(fmt)  [NSString stringWithFormat:@"(UDLog)%@", fmt]
+#define UDLog(fmt, ...) NSLog(SignUDLog(fmt), ##__VA_ARGS__)
 
 #define UDBreak	 raise(SIGTRAP)
 

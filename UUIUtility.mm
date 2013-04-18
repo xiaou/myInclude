@@ -62,8 +62,9 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
     }
 }
 
-- (void)pushFlipAnimationViewController:(UIViewController *)vc
-                    withCompletionBlock:(void (^)(void))block
+- (void)pushAnimationViewController:(UIViewController *)vc
+                     withTransition:(UIViewAnimationTransition)transition
+                    completionBlock:(void (^)(void))block
 {    
     UIViewController * oldViewController = [[self.topViewController retain] autorelease];
     [self pushViewController:vc animated:NO];
@@ -78,7 +79,7 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
         
     [UIView beginAnimations:@"__FlipAnimationForNav" context:NULL];  
     [UIView setAnimationDuration:.7];  
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft   
+    [UIView setAnimationTransition:transition
                            forView:oldView cache:YES];  
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
@@ -86,7 +87,8 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
     [UIView commitAnimations];
 }
 
-- (void)popFlipAnimationViewControllerWithCompletionBlock:(void (^)(void))block
+- (void)popAnimationViewControllerWithTransition:(UIViewAnimationTransition)transition
+                                 completionBlock:(void (^)(void))block
 {
     UIViewController * oldViewController = [[self.topViewController retain] autorelease];
     
@@ -100,7 +102,7 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
     
     [UIView beginAnimations:@"__FlipAnimationForNav" context:NULL];  
     [UIView setAnimationDuration:.7];  
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight  
+    [UIView setAnimationTransition:transition
                            forView:oldView cache:YES];  
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
@@ -184,6 +186,54 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
 
 @end
 
+
+@implementation NSDate(_UIU_)
+
++ (NSDate *)todayZero
+{
+    NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
+    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+    NSDate * today = [NSDate date];
+    int y, m, d;
+    [today parseOutYear:&y month:&m day:&d week:NULL hour:NULL min:NULL sec:NULL];
+    comps.year = y;
+    comps.month = m;
+    comps.day = d;
+    return [calendar dateFromComponents:comps];
+}
+
+- (void)parseOutYear:(int *)pYear month:(int *)pMonth day:(int *)pDay week:(int *)pWeek
+                hour:(int *)pHour min:(int *)pMin sec:(int *)pSec
+{
+    NSDateFormatter *formatter =[[[NSDateFormatter alloc] init] autorelease];
+    NSDate *date = self;
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+    NSInteger unitFlags = NSYearCalendarUnit |
+    NSMonthCalendarUnit |
+    NSDayCalendarUnit |
+    NSWeekdayCalendarUnit |
+    NSHourCalendarUnit |
+    NSMinuteCalendarUnit |
+    NSSecondCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    if(pYear)
+        *pYear = [comps year];
+    if(pMonth)
+        *pMonth = [comps month];
+    if(pDay)
+        *pDay = [comps day];
+    if(pWeek)
+        *pWeek = [comps weekday];
+    if(pHour)
+        *pHour = [comps hour];
+    if(pMin)
+        *pMin = [comps minute];
+    if(pSec)
+        *pSec = [comps second];
+}
+
+@end
 
 
 
