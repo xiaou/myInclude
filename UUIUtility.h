@@ -3,8 +3,9 @@
  * @brief 快捷UI获取等辅助工具.
  * @author hUyIncHun
  * @date 2012
- * @version 2.36
+ * @version 2.38
  * @par 修改记录：
+ *  -2.38:fix bug about UIUGetMainWindow().
  *  -2.34:修改nav的push动画方法名.
  *  -2.3:增加category方法.
  *  -2.2:增加nav的push和pop的翻转动画函数.(未经严格测验，仅保证在tab嵌nav的状况下无误.)

@@ -29,7 +29,7 @@ UILabel * UIUGetUILabel(NSString * title)
 
 UIWindow * UIUGetMainWindow()
 {
-    return [[UIApplication sharedApplication] keyWindow];
+    return [[[UIApplication sharedApplication] windows] objectAtIndex:0];
 }
 
 BOOL UIUDeviceIsBackgroundSupported()
