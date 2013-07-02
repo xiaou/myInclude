@@ -3,8 +3,10 @@
  * @brief 快捷UI获取等辅助工具.
  * @author hUyIncHun
  * @date 2012
- * @version 2.38
+ * @version 2.41
  * @par 修改记录：
+ *  -2.41:优化NSDate(_UIU_)的部分实现.
+ *  -2.4:加入判断设备分辨率(来自网上).
  *  -2.38:fix bug about UIUGetMainWindow().
  *  -2.34:修改nav的push动画方法名.
  *  -2.3:增加category方法.
@@ -84,6 +86,26 @@ CG_EXTERN BOOL UIUDeviceIsBackgroundSupported();
 + (NSDate *)todayZero;/**< 获取今日零点的NSDate. */
 - (void)parseOutYear:(int *)pYear month:(int *)pMonth day:(int *)pDay week:(int *)pWeek
                 hour:(int *)pHour min:(int *)pMin sec:(int *)pSec;
+@end
+
+
+/// 设备分辨率
+//
+enum {
+    // iPhone 1,3,3GS 标准分辨率(320x480px)
+    UIDevice_iPhoneStandardRes      = 1,
+    // iPhone 4,4S 高清分辨率(640x960px)
+    UIDevice_iPhoneHiRes            = 2,
+    // iPhone 5 高清分辨率(640x1136px)
+    UIDevice_iPhoneTallerHiRes      = 3,
+    // iPad 1,2 标准分辨率(1024x768px)
+    UIDevice_iPadStandardRes        = 4,
+    // iPad 3 High Resolution(2048x1536px)
+    UIDevice_iPadHiRes              = 5
+}; typedef NSUInteger UIDeviceResolution;
+
+@interface UIDevice (Resolutions)
++ (UIDeviceResolution) currentResolution;
 @end
 
 /**************************************************/

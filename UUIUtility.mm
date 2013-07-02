@@ -189,26 +189,29 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
 
 @implementation NSDate(_UIU_)
 
+static NSCalendar * calendar_;
+
++(void)load
+{
+    calendar_ = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+}
+
 + (NSDate *)todayZero
 {
     NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
-    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
     NSDate * today = [NSDate date];
     int y, m, d;
     [today parseOutYear:&y month:&m day:&d week:NULL hour:NULL min:NULL sec:NULL];
     comps.year = y;
     comps.month = m;
     comps.day = d;
-    return [calendar dateFromComponents:comps];
+    return [calendar_ dateFromComponents:comps];
 }
 
 - (void)parseOutYear:(int *)pYear month:(int *)pMonth day:(int *)pDay week:(int *)pWeek
                 hour:(int *)pHour min:(int *)pMin sec:(int *)pSec
 {
-    NSDateFormatter *formatter =[[[NSDateFormatter alloc] init] autorelease];
     NSDate *date = self;
-    [formatter setTimeStyle:NSDateFormatterMediumStyle];
-    NSCalendar *calendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
     NSInteger unitFlags = NSYearCalendarUnit |
     NSMonthCalendarUnit |
     NSDayCalendarUnit |
@@ -216,7 +219,7 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
     NSHourCalendarUnit |
     NSMinuteCalendarUnit |
     NSSecondCalendarUnit;
-    NSDateComponents *comps = [calendar components:unitFlags fromDate:date];
+    NSDateComponents *comps = [calendar_ components:unitFlags fromDate:date];
     if(pYear)
         *pYear = [comps year];
     if(pMonth)
@@ -236,9 +239,23 @@ static void (^ g_block4flipAnimation4Nav)(void) = NULL;
 @end
 
 
+@implementation UIDevice (Resolutions)
 
++ (UIDeviceResolution) currentResolution {
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        if ([[UIScreen mainScreen] respondsToSelector: @selector(scale)]) {
+            CGSize result = [[UIScreen mainScreen] bounds].size;
+            result = CGSizeMake(result.width * [UIScreen mainScreen].scale, result.height * [UIScreen mainScreen].scale);
+            if (result.height <= 480.0f)
+                return UIDevice_iPhoneStandardRes;
+            return (result.height > 960 ? UIDevice_iPhoneTallerHiRes : UIDevice_iPhoneHiRes);
+        } else
+            return UIDevice_iPhoneStandardRes;
+    } else
+        return (([[UIScreen mainScreen] respondsToSelector: @selector(scale)]) ? UIDevice_iPadHiRes : UIDevice_iPadStandardRes);
+}
 
-
+@end
 
 
 
